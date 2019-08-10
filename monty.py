@@ -3,7 +3,7 @@
 
 import os
 
-from sys import argv, exit
+from sys import argv, exit, stderr
 
 
 def pall(stack):
@@ -20,8 +20,8 @@ def pint(line_number, stack):
     """
     length = len(stack)
     if length == 0:
-        print("{:d}: can't pint, stack empty".format(line_number))
-        exit(0)
+        print("L{:d}: can't pint, stack empty".format(line_number), file=stderr)
+        exit(1)
     print(stack[length - 1])
 
 
@@ -56,8 +56,8 @@ def line_reader(line_number, line, stack):
     elif opcode in maths:
         # check that there are at least 2 elements in stack
         return
-    print("{:d}: unknown instruction '{}'".format(line_number, words[0]))
-    exit(0)
+    print("L{:d}: unknown instruction '{}'".format(line_number, words[0]), file=stderr)
+    exit(1)
 
 
 def monty(argv):
@@ -69,16 +69,16 @@ def monty(argv):
     num_args = len(argv)
     if num_args != 2:
         # user must enter only one argument
-        print("Usage: ./monty.py <file_name>")
-        return
+        print("Usage: ./monty.py <file_name>", file=stderr)
+        exit(1)
     if os.path.isfile(argv[1]) is False:
         # cannot find the file
-        print("'{}' is not a valid file path".format(argv[1]))
-        return
+        print("Error: Can't open file '{}'".format(argv[1]), file=stderr)
+        exit(1)
     if os.access(argv[1], os.R_OK) is False:
         # user does not have permission to read the file
-        print("you do not have permission to read '{}'".format(argv[1]))
-        return
+        print("Error: Can't open file '{}'".format(argv[1]), file=stderr)
+        exit(1)
     with open(argv[1]) as f:
         lines = f.read()
     line_number = 0
