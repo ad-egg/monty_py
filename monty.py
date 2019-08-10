@@ -1,28 +1,12 @@
 #!/usr/bin/python3
-"""main function of bytecode file command interpreter"""
+"""contains main and line reading functions of bytecodes interpreter"""
 
 import os
 
+from manipulate_stack import *
+from print_stack import pall, pint
+
 from sys import argv, exit, stderr
-
-
-def pall(stack):
-    """
-    prints all elements of a stack
-    """
-    for element in stack:
-        print(element)
-
-
-def pint(line_number, stack):
-    """
-    prints the top element of a stack
-    """
-    length = len(stack)
-    if length == 0:
-        print("L{:d}: can't pint, stack empty".format(line_number), file=stderr)
-        exit(1)
-    print(stack[length - 1])
 
 
 def line_reader(line_number, line, stack):
@@ -33,31 +17,39 @@ def line_reader(line_number, line, stack):
         "nop", "#",
     }
     printing = {
-        "pall", "pint", "pstr", "pchar",
-    }
-    math = {
-        "add", "sub", "mul", "div", "mod",
+        "pall": "pall(stack)",
+        "pint": "pint(line_number, stack)",
+        "pstr": "pstr(line_number, stack)",
+        "pchar": "pchar(line_number, stack)",
     }
     manipulating = {
-        "push", "pop", "rotl", "rotr", "swap",
+        "add": "add(line_number, stack)",
+        "sub": "sub(line_number, stack)",
+        "mul": "mul(line_number, stack)",
+        "div": "div(line_number, stack)",
+        "mod": "mod(line_number, stack)",
+        "push": "push(line_number, stack, line)",
+        "pop": "pop(line_number, stack)",
+        "rotl": "rotl(stack)",
+        "rotr": "rotr(stack)",
+        "swap": "swap(line_number, stack)",
     }
-    words = line.split(" ")
-    opcode = words[0]
-    if opcode in skip:
+    words = line.split()
+    try:
+        opcode = words[0]
+        if opcode in skip:
+            return
+        elif opcode in printing.keys():
+            eval(printing[opcode])
+        elif opcode in manipulating.keys():
+            eval(manipulating[opcode])
+        else:
+            print("L{:d}: unknown instruction '{}'".format(
+                        line_number, words[0]), file=stderr)
+            exit(1)
         return
-    elif opcode in printing:
-        if opcode == "pall":
-            pall(stack)
-        elif opcode == "pint":
-            pint(line_number, stack)
-    elif opcode in manipulating:
-        # check words[1] exists and that it is an integer
+    except IndexError:
         return
-    elif opcode in maths:
-        # check that there are at least 2 elements in stack
-        return
-    print("L{:d}: unknown instruction '{}'".format(line_number, words[0]), file=stderr)
-    exit(1)
 
 
 def monty(argv):
@@ -81,6 +73,7 @@ def monty(argv):
         exit(1)
     with open(argv[1]) as f:
         lines = f.read()
+    lines = lines.split("\n")
     line_number = 0
     stack = []
     for line in lines:
@@ -89,6 +82,7 @@ def monty(argv):
         line_reader(line_number, line, stack)
         line_number += 1
     return
+
 
 if __name__ == "__main__":
     monty(argv)
