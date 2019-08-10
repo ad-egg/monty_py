@@ -13,6 +13,7 @@ def pall(stack):
     for element in stack:
         print(element)
 
+
 def pint(line_number, stack):
     """
     prints the top element of a stack
@@ -21,8 +22,8 @@ def pint(line_number, stack):
     if length == 0:
         print("{:d}: can't pint, stack empty".format(line_number))
         exit(0)
-    else
-        print(stack[length - 1])
+    print(stack[length - 1])
+
 
 def line_reader(line_number, line, stack):
     """
@@ -50,14 +51,13 @@ def line_reader(line_number, line, stack):
         elif opcode == "pint":
             pint(line_number, stack)
     elif opcode in manipulating:
-    # check words[1] exists and that it is an integer
+        # check words[1] exists and that it is an integer
         return
     elif opcode in maths:
-    # check that there are at least 2 elements in stack
+        # check that there are at least 2 elements in stack
         return
-    else
-        print("{:d}: unknown instruction '{}'".format(line_number, words[0]))
-        exit(0)
+    print("{:d}: unknown instruction '{}'".format(line_number, words[0]))
+    exit(0)
 
 
 def monty(argv):
