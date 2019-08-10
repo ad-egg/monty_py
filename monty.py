@@ -3,42 +3,61 @@
 
 import os
 
-from sys import argv
+from sys import argv, exit
 
 
-def line_reader(line):
+def pall(stack):
+    """
+    prints all elements of a stack
+    """
+    for element in stack:
+        print(element)
+
+def pint(line_number, stack):
+    """
+    prints the top element of a stack
+    """
+    length = len(stack)
+    if length == 0:
+        print("{:d}: can't pint, stack empty".format(line_number))
+        exit(0)
+    else
+        print(stack[length - 1])
+
+def line_reader(line_number, line, stack):
     """
     takes a string, splits it, executes any commands on a stack
     """
     skip = {
-        "nop",
-        "#",
+        "nop", "#",
     }
     printing = {
-        "pall",
-        "pint",
-        "pstr",
-        "pchar",
+        "pall", "pint", "pstr", "pchar",
+    }
+    math = {
+        "add", "sub", "mul", "div", "mod",
     }
     manipulating = {
-        "add",
-        "sub",
-        "mul",
-        "div",
-        "mod",
-        "push",
-        "pop",
-        "rotl",
-        "rotr",
-        "swap",
+        "push", "pop", "rotl", "rotr", "swap",
     }
     words = line.split(" ")
-    if words[0] in skip:
+    opcode = words[0]
+    if opcode in skip:
         return
-    elif words[0] in printing:
+    elif opcode in printing:
+        if opcode == "pall":
+            pall(stack)
+        elif opcode == "pint":
+            pint(line_number, stack)
+    elif opcode in manipulating:
+    # check words[1] exists and that it is an integer
         return
-    elif words[0] in manipulating:
+    elif opcode in maths:
+    # check that there are at least 2 elements in stack
         return
+    else
+        print("{:d}: unknown instruction '{}'".format(line_number, words[0]))
+        exit(0)
 
 
 def monty(argv):
@@ -62,12 +81,14 @@ def monty(argv):
         return
     with open(argv[1]) as f:
         lines = f.read()
+    line_number = 0
+    stack = []
     for line in lines:
         # send entire line to helper function
         # helper function splits line and manipulates stack
-        line_reader(line)
-        continue
+        line_reader(line_number, line, stack)
+        line_number += 1
     return
 
-if __name__=="__main__":
+if __name__ == "__main__":
     monty(argv)
