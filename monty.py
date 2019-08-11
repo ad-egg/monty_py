@@ -19,7 +19,7 @@ def line_reader(line_number, line, stack):
     printing = {
         "pall": "pall(line_number, stack)",
         "pint": "pint(line_number, stack)",
-        "pstr": "pstr(stack)",
+        "pstr": "pstr(line_number, stack)",
         "pchar": "pchar(line_number, stack)",
     }
     manipulating = {
