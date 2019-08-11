@@ -23,7 +23,7 @@ def pall(line_number, stack):
     if length > 0:
         for i in range(length):
             # slices off last element of list and passes it to pint method
-            pint(line_number, stack[:i + 1])
+            pint(line_number, stack[:length - i])
 
 
 def pchar(line_number, stack):
