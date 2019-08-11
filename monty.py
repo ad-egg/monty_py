@@ -30,8 +30,8 @@ def line_reader(line_number, line, stack):
         "mod": "mod(line_number, stack)",
         "push": "push(line_number, stack, line)",
         "pop": "pop(line_number, stack)",
-        "rotl": "rotl(stack)",
-        "rotr": "rotr(stack)",
+        "rotl": "rotl(line_number, stack)",
+        "rotr": "rotr(line_number, stack)",
         "swap": "swap(line_number, stack)",
     }
     words = line.split()
@@ -47,7 +47,6 @@ def line_reader(line_number, line, stack):
             print("L{:d}: unknown instruction '{}'".format(
                         line_number, words[0]), file=stderr)
             exit(1)
-        return
     except IndexError:
         return
 
