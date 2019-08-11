@@ -22,7 +22,8 @@ def pall(line_number, stack):
     length = len(stack)
     if length > 0:
         for i in range(length):
-            pint(line_number, stack[0:i + 1])
+            # slices off last element of list and passes it to pint method
+            pint(line_number, stack[:i + 1])
 
 
 def pchar(line_number, stack):
@@ -32,7 +33,7 @@ def pchar(line_number, stack):
     return
 
     
-def pstr(stack):
+def pstr(line_number, stack):
     """
     prints the characters of the integer values in a stack
     """
