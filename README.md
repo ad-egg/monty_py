@@ -4,7 +4,7 @@
 This is an interpreter for Monty bytecodes files. [Monty](http://montyscoconut.github.io/) is a scripting language that is first compiled into Monty byte codes. It relies on a unique stack data structure with specific instructions to manipulate it. Monty byte codes usually have the `.m` extension.
 
 ### Why?
-I basically redid [Monty bytecodes interpreter in C](https://github.com/ad-egg/monty) using Python programming language to review the concepts of file input/output, linked lists, and stack data structure in Python.
+I basically redid [Monty bytecodes interpreter in C](https://github.com/ad-egg/monty) using Python programming language to review the concepts of file input/output, linked lists, and stack data structure in Python. For the project in C, I implemented a singly linked list for a stack. For this project, I used a list as a stack.
 
 ### Requirements
 - Ubuntu 16.04 LTS
