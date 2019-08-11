@@ -4,7 +4,7 @@
 import os
 
 from manipulate_stack import *
-from print_stack import pall, pint
+from print_stack import *
 
 from sys import argv, exit, stderr
 

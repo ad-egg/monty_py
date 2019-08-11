@@ -17,7 +17,7 @@ def pint(line_number, stack):
 
 def pall(line_number, stack):
     """
-    prints all elements of a stack
+    prints all elements of a stack starting from the top
     """
     length = len(stack)
     if length > 0:
@@ -30,11 +30,30 @@ def pchar(line_number, stack):
     """
     prints the character of the integer value at top of stack
     """
-    return
+    if len(stack) == 0:
+        print("L{:d}: can't pchar, stack empty".format(
+                    line_number), file=stderr)
+        exit
+    number = stack[-1]
+    if number > 32 and number < 127:
+        print(chr(number))
+    else:
+        print("L{:d}: can't pchar, value out of range".format(), file=stderr)
+        exit(1)
 
     
 def pstr(line_number, stack):
     """
     prints the characters of the integer values in a stack
     """
-    return
+    length = len(stack)
+    if length > 0:
+        stack2 = stack[:]
+        for i in range(length):
+            number = stack2[-1]
+            if number > 32 and number < 127:
+                print("{}".format(chr(number)), end="")
+                stack2.pop()
+            else:
+                break
+    print("")
