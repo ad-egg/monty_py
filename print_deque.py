@@ -4,13 +4,13 @@
 from sys import exit, stderr
 
 
-def pint(line_number, structure):
+def pint(line_number, structure, s_q):
     """
     prints the top element of a stack
     """
     if len(structure) == 0:
-        print("L{:d}: can't pint, stack empty".format(
-                    line_number), file=stderr)
+        print("L{:d}: can't pint, {} empty".format(
+                    line_number, s_q), file=stderr)
         exit(1)
     print(structure[0])
 
@@ -25,13 +25,13 @@ def pall(line_number, structure):
             print(structure[i])
 
 
-def pchar(line_number, structure):
+def pchar(line_number, structure, s_q):
     """
     prints the character of the integer value at top of stack
     """
     if len(structure) == 0:
-        print("L{:d}: can't pchar, stack empty".format(
-                    line_number), file=stderr)
+        print("L{:d}: can't pchar, {} empty".format(
+                    line_number, s_q), file=stderr)
         exit
     number = structure[0]
     if number > 32 and number < 127:

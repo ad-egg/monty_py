@@ -10,7 +10,7 @@ from collections import deque
 from sys import argv, exit, stderr
 
 
-def line_reader(line_number, line, stack):
+def line_reader(line_number, line, stack, s_q):
     """
     takes a string, splits it, executes any commands on a stack or queue
     """
@@ -22,30 +22,29 @@ def line_reader(line_number, line, stack):
     }
     printing = {
         "pall": "pall(line_number, structure)",
-        "pint": "pint(line_number, structure)",
+        "pint": "pint(line_number, structure, s_q)",
         "pstr": "pstr(line_number, structure)",
-        "pchar": "pchar(line_number, structure)",
+        "pchar": "pchar(line_number, structure, s_q)",
     }
     manipulating = {
-        "add": "add(line_number, structure)",
-        "sub": "sub(line_number, structure)",
-        "mul": "mul(line_number, structure)",
-        "div": "div(line_number, structure)",
-        "mod": "mod(line_number, structure)",
+        "add": "add(line_number, structure, s_q)",
+        "sub": "sub(line_number, structure, s_q)",
+        "mul": "mul(line_number, structure, s_q)",
+        "div": "div(line_number, structure, s_q)",
+        "mod": "mod(line_number, structure, s_q)",
         "push": "push(line_number, structure, line, s_q)",
-        "pop": "pop(line_number, structure)",
+        "pop": "pop(line_number, structure, s_q)",
         "rotl": "rotl(line_number, structure)",
         "rotr": "rotr(line_number, structure)",
-        "swap": "swap(line_number, structure)",
+        "swap": "swap(line_number, structure, s_q)",
     }
-    s_q = "stack"
     words = line.split()
     try:
         opcode = words[0]
         if opcode in t:
             s_q = opcode
         elif opcode in skip:
-            return
+            return s_q
         elif opcode in printing.keys():
             eval(printing[opcode])
         elif opcode in manipulating.keys():
@@ -55,7 +54,8 @@ def line_reader(line_number, line, stack):
                         line_number, words[0]), file=stderr)
             exit(1)
     except IndexError:
-        return
+        return s_q
+    return s_q
 
 
 def monty(argv):
@@ -81,11 +81,12 @@ def monty(argv):
         lines = f.read()
     lines = lines.split("\n")
     line_number = 0
+    s_q = "stack"
     structure = deque([])
     for line in lines:
         # send entire line to helper function
         # helper function splits line and manipulates stack/queue
-        line_reader(line_number, line, structure)
+        s_q = line_reader(line_number, line, structure, s_q)
         line_number += 1
     return
 
