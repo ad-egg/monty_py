@@ -94,21 +94,19 @@ def mod(line_number, structure, s_q):
     structure[0] = top % b
 
 
-def rotl(line_number, structure):
+def rotl(line_number, structure, s_q):
     """rotates stack to the left so that top of stack becomes bottom of stack"""
     length = len(structure)
     if length > 2:
-        top = pop(line_number, structure)
-        structure.insert(0, top)
+        structure.rotate(-1)
     elif length == 2:
-        swap(line_number, structure)
+        swap(line_number, structure, s_q)
 
 
-def rotr(line_number, structure):
+def rotr(line_number, structure, s_q):
     """rotates stack to the right so that bottom of stack becomes top of stack"""
     length = len(structure)
     if length > 2:
-        bottom = structure.pop(0)
-        structure.append(bottom)
+        structure.rotate(1)
     elif length == 2:
-        swap(line_number, structure)
+        swap(line_number, structure, s_q)

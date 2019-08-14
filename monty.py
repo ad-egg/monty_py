@@ -34,8 +34,8 @@ def line_reader(line_number, line, structure, s_q):
         "mod": "mod(line_number, structure, s_q)",
         "push": "push(line_number, structure, line, s_q)",
         "pop": "pop(line_number, structure, s_q)",
-        "rotl": "rotl(line_number, structure)",
-        "rotr": "rotr(line_number, structure)",
+        "rotl": "rotl(line_number, structure, s_q)",
+        "rotr": "rotr(line_number, structure, s_q)",
         "swap": "swap(line_number, structure, s_q)",
     }
     words = line.split()
