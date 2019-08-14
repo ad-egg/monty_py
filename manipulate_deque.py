@@ -13,7 +13,7 @@ def push(line_number, structure, line, s_q):
     except IndexError or ValueError:
         print("L{:d}: usage: push <integer>".format(line_number), file=stderr)
         exit(1)
-    if sq == "stack":
+    if s_q == "stack":
         structure.appendleft(number)
     else:
         structure.append(number)
@@ -43,7 +43,7 @@ def add(line_number, structure, s_q):
     if len(structure) < 2:
         print("L{:d}: can't add, {} too short".format(line_number, s_q), file=stderr)
         exit(1)
-    b = pop(line_number, structure)
+    b = pop(line_number, structure, s_q)
     top = structure[0]
     structure[0] = top + b
 
@@ -53,7 +53,7 @@ def sub(line_number, structure, s_q):
     if len(structure) < 2:
         print("L{:d}: can't sub, {} too short".format(line_number, s_q), file=stderr)
         exit(1)
-    b = pop(line_number, structure)
+    b = pop(line_number, structure, s_q)
     top = structure[0]
     structure[0] = top - b
 
@@ -66,7 +66,7 @@ def div(line_number, structure, s_q):
     if structure[0] == 0:
         print("L{:d}: division by zero".format(line_number), file=stderr)
         exit(1)
-    b = pop(line_number, structure)
+    b = pop(line_number, structure, s_q)
     top = structure[0]
     structure[0] = top / b
 
@@ -76,7 +76,7 @@ def mul(line_number, structure, s_q):
     if len(structure) < 2:
         print("L{:d}: can't mul, {} too short".format(line_number, s_q), file=stderr)
         exit(1)
-    b = pop(line_number, structure)
+    b = pop(line_number, structure, s_q)
     top = structure[0]
     structure[0] = top * b
 
@@ -89,7 +89,7 @@ def mod(line_number, structure, s_q):
     if structure[0] == 0:
         print("L{:d}: division by zero".format(line_number), file=stderr)
         exit(1)
-    b = pop(line_number, structure)
+    b = pop(line_number, structure, s_q)
     top = structure[0]
     structure[0] = top % b
 

@@ -3,14 +3,14 @@
 
 import os
 
-from manipulate_stack import *
-from print_stack import *
+from manipulate_deque import *
+from print_deque import *
 
 from collections import deque
 from sys import argv, exit, stderr
 
 
-def line_reader(line_number, line, stack, s_q):
+def line_reader(line_number, line, structure, s_q):
     """
     takes a string, splits it, executes any commands on a stack or queue
     """
