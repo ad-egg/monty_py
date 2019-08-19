@@ -122,3 +122,15 @@ $ ./monty.py bytecodes/12.m
   Usage: `rotr`
 
   What it does: rotates the stack to the right.
+
+- **stack**
+
+  Usage: `stack`
+  
+  What it does: implements a stack (stack is default)
+  
+- **queue**
+
+  Usage: `queue`
+  
+  What it does: implements a queue
